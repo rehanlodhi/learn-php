@@ -1,0 +1,124 @@
+/*****************************************************/
+                    /*Globals*/
+/*****************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+}
+
+.db-msg,
+.form-error-msg{
+    background: #f4f4f4;
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+}
+.db-error,
+.form-error-msg{
+    color: red;
+}
+.db-success{
+    color: green;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+blockquote{
+    margin: 0;
+}
+ul{
+    padding: 0;
+}
+/*****************************************************/
+                    /*Header*/
+/*****************************************************/
+.site-header h1{
+    width: 100%;
+    margin: 0;
+    padding: 40px 0;
+    text-align: center;
+    color: #fff;
+    background-color: #A72608;
+}
+.site-header nav{
+    background-color: #000;
+}
+.site-header nav ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.site-header nav ul li a{
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 10px 15px;
+}
+.site-header nav ul li a:hover{
+    background-color: #BBC5AA;
+    color: #000;
+}
+/*****************************************************/
+                    /*jokes.php*/
+/*****************************************************/
+
+.joke-list li{
+    list-style: none;
+    background-color: #E6EED6;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
+}
+.joke-list li .joke-body{
+    display: flex;
+    align-items: center;
+}
+.joke-list li .joke-body p{
+    width: 90%;
+}
+.joke-list li .joke-body form{
+    margin-left: auto;
+}
+
+/*****************************************************/
+                    /*addjoke.php*/
+/*****************************************************/
+.form-container{
+    display: flex;
+    flex-direction: column;
+}
+.form-container label{
+    font-size: 16px;
+    font-weight: bold;
+}
+.form-container label,
+.form-container textarea{
+    margin: 10px 0;
+}
+.form-container textarea{
+    resize: none;
+}
+
+/*****************************************************/
+                    /*Footer*/
+/*****************************************************/
+footer{
+    margin-top: auto;
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+}
+footer p{
+    margin: 0;
+    padding: 10px 0;
+}
