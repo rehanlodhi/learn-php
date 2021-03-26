@@ -7,7 +7,6 @@ try {
     $jokes = getAllJokes($pdo);
     $title = 'Joke list';
     $totalJokes = totalJokes($pdo);
-    $joke1 = getJoke($pdo, 12);
     ob_start();
     include __DIR__ . '/templates/jokes.html.php';
     $output = ob_get_clean();

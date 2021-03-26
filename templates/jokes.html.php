@@ -3,7 +3,10 @@
     <?php foreach ($jokes as $joke): ?>
         <li>
             <div class="joke-body">
-                <p><?php echo htmlspecialchars($joke['joketext'], ENT_QUOTES, 'UTF-8') ?> (<a href="mailto:<?php echo $joke['email'] ?>"><?php echo $joke['name'] ?></a>)</p>
+                <p><?php echo htmlspecialchars($joke['joketext'], ENT_QUOTES, 'UTF-8') ?> (
+                    <a href="mailto:<?php echo $joke['email'] ?>"><?php echo $joke['name'] ?></a>
+                    on <?php echo $joke['jokedate']?>)
+                </p>
                 <a href="editjoke.php?id=<?php echo $joke['id'] ?>">Edit</a>
                 <form action="deletejoke.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $joke['id'] ?>">
