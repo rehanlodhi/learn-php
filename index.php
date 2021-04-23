@@ -6,7 +6,7 @@ $output = ob_get_clean();
 include __DIR__ . '/templates/layout.html.php';
 
 
-function insertJoke($pdo, $fields){
+/*function insertJoke($pdo, $fields){
     $query = 'INSERT INTO `joke` SET';
     foreach ($fields as $key => $values){
         $query .= '`' . $key . '` = :' . $key;
@@ -17,4 +17,4 @@ function insertJoke($pdo, $fields){
 insertJoke('ss', [
     'authorid' => 1,
     'joketext' => 'I am a one funny fucktard'
-]);
+]);*/

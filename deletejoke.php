@@ -3,8 +3,8 @@ try {
     include __DIR__ . '/includes/DatabaseConnection.php';
     include __DIR__ . '/includes/DatabaseFunctions.php';
 
-    deleteJoke($pdo,  $_POST['id']);
-
+    //deleteJoke($pdo,  $_POST['id']); joke table specific function
+    delete($pdo, 'joke', 'id', $_POST['id']);
     header('location: jokes.php');
 } catch (PDOException $e){
     $title = 'An error has occurred';
