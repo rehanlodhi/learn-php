@@ -1,20 +1,26 @@
 <?php
-$title = 'Internet Joke Database';
-ob_start();
-include __DIR__ . '/templates/home.html.php';
-$output = ob_get_clean();
-include __DIR__ . '/templates/layout.html.php';
+try {
+    include __DIR__ . '/includes/DatabaseConnection.php';
+    include __DIR__ . '/includes/classes/Database.php';
+    include __DIR__ . '/includes/controllers/JokeController.php';
 
+    $jokesTable = new Database($pdo, 'joke', 'id');
+    $authorsTable = new Database($pdo, 'joke', 'id');
+    $jokeController = new JokeController($jokesTable, $authorsTable);
 
-/*function insertJoke($pdo, $fields){
-    $query = 'INSERT INTO `joke` SET';
-    foreach ($fields as $key => $values){
-        $query .= '`' . $key . '` = :' . $key;
-    }
+    $action = $_GET['action'] ?? 'home';
 
-    echo $query;
+    $page = $jokeController->$action();
+
+    $title = $page['title'];
+
+    ob_start();
+    include __DIR__ . '/templates/' . $page['template'];
+    $output = ob_get_clean();
+
+} catch (PDOException $e) {
+    $title = 'An error has occurred';
+    $output = 'Database error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
 }
-insertJoke('ss', [
-    'authorid' => 1,
-    'joketext' => 'I am a one funny fucktard'
-]);*/
+
+include __DIR__ . '/templates/layout.html.php';

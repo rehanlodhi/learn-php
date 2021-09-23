@@ -1,14 +1,17 @@
 <?php
 try {
     include __DIR__ . '/includes/DatabaseConnection.php';
-    include_once __DIR__ . '/includes/DatabaseFunctions.php';
-
+    include_once __DIR__ . '/includes/classes/Database.php';
 
     //$jokes = getAllJokes($pdo); joke table able specific function
-    $result = findAll($pdo, 'joke');
+    $jokesTable = new Database($pdo, 'joke', 'id');
+    $authorTable = new Database($pdo, 'author', 'id');
+
+    $result = $jokesTable->findAll();
+
     $jokes = array();
     foreach ($result as $joke){
-        $author = findById($pdo, 'author', 'id', $joke['authorid']);
+        $author = $authorTable->findById($joke['authorid']);
         $jokes[] = [
             'id' => $joke['id'],
             'joketext' => $joke['joketext'],
@@ -18,7 +21,7 @@ try {
         ];
     }
     $title = 'Joke list';
-    $totalJokes = total($pdo, 'joke');
+    $totalJokes = $jokesTable->total();
     ob_start();
     include __DIR__ . '/templates/jokes.html.php';
     $output = ob_get_clean();

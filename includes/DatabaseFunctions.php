@@ -61,7 +61,7 @@ function update($pdo, $table, $primarykey, $fields){
 
 // Get one record from database
 function findById($pdo, $table, $primarykey, $value){
-    $query = 'SELECT * FROM `' . $table . '`WHERE `' . $primarykey . '` = :value';
+    $query = 'SELECT * FROM `' . $table . ' `WHERE `' . $primarykey . '` = :value';
     $parameters = [
         'value' => $value
     ];

@@ -7,7 +7,7 @@ class Database{
 
     public function __construct(PDO $pdo, string $table, string $primaryKey) {
         $this->pdo = $pdo;
-        $this->$table = $table;
+        $this->table = $table;
         $this->primaryKey = $primaryKey;
     }
 
@@ -27,7 +27,7 @@ class Database{
 // Delete record from database
     public function delete($id){
         $parameters = [':id' => $id];
-        $this->query($this->pdo, 'DELETE FROM`' . $this->table . '` WHERE `' . $this->primarykey .'` = :id', $parameters);
+        $this->query('DELETE FROM`' . $this->table . '` WHERE `' . $this->primaryKey .'` = :id', $parameters);
     }
 
 // Insert record into database
@@ -46,8 +46,8 @@ class Database{
 // Update record if find duplicate id
     public function save($record){
         try {
-            if ($record[$this->primarykey] == '' ){
-                $record[$this->primarykey] = null;
+            if ($record[$this->primaryKey] == '' ){
+                $record[$this->primaryKey] = null;
             }
             $this->insert($record);
 
@@ -63,7 +63,7 @@ class Database{
             $query .= '`' . $key . '` = :' . $key . ',';
         }
         $query = rtrim($query, ',');
-        $query .= ' WHERE `'. $this->primarykey .'` = :primarykey';
+        $query .= ' WHERE `'. $this->primaryKey .'` = :primarykey';
 
         $fields['primarykey'] = $fields['id'];
         $fields = $this->processDates($fields);
@@ -73,7 +73,8 @@ class Database{
 
 // Get one record from database
     public function findById($value){
-        $query = 'SELECT * FROM `' . $this->table . '`WHERE `' . $this->primarykey . '` = :value';
+        $query = 'SELECT * FROM `' . $this->table .'`WHERE `' . $this->primaryKey . '` = :value';
+
         $parameters = [
             'value' => $value
         ];
