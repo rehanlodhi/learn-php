@@ -23,7 +23,14 @@ class JokeController {
         }
         $title = 'Joke list';
         $totalJokes = $this->jokesTable->total();
-        return ['template' => 'jokes.html.php', 'title' => $title];
+        return [
+          'template' => 'jokes.html.php',
+          'title' => $title,
+          'variables' => [
+              'jokes' => $jokes,
+              'totalJokes' => $totalJokes
+            ]
+          ];
     }
 
     public function home(){
@@ -52,7 +59,13 @@ class JokeController {
             }
 
             $title = 'Edit Joke';
-            return ['template' => 'editjoke.html.php', 'title' => $title];
+            return [
+              'template' => 'editjoke.html.php',
+              'title' => $title,
+              'variables' => [
+                'joke' => $joke ?? null
+              ]
+            ];
         }
     }
 }

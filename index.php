@@ -1,4 +1,13 @@
 <?php
+
+function loadTemplate( $templateFileName, $variables=[]) {
+
+  extract($variables);
+
+  ob_start();
+  include __DIR__ . '/templates/' . $templateFileName;
+  return ob_get_clean();
+}
 try {
     include __DIR__ . '/includes/DatabaseConnection.php';
     include __DIR__ . '/includes/classes/Database.php';
@@ -14,9 +23,11 @@ try {
 
     $title = $page['title'];
 
-    ob_start();
-    include __DIR__ . '/templates/' . $page['template'];
-    $output = ob_get_clean();
+    if( isset($page['variables']) ){
+      $output = loadTemplate($page['template'], $page['variables']);
+    }else {
+      $output = loadTemplate( $page['template']);
+    }
 
 } catch (PDOException $e) {
     $title = 'An error has occurred';
