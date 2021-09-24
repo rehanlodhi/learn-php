@@ -14,11 +14,11 @@ class JokeController {
         foreach ($result as $joke){
             $author = $this->authorsTable->findById($joke['authorid']);
             $jokes[] = [
-                'id' => $joke['id'],
+                'id'       => $joke['id'],
                 'joketext' => $joke['joketext'],
                 'jokedate' => $joke['jokedate'],
-                'name' => $author['name'],
-                'email' => $author['email']
+                'name'     => $author['name'] ?? '',
+                'email'    => $author['email'] ?? ''
             ];
         }
         $title = 'Joke list';
