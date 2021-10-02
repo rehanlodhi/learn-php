@@ -16,9 +16,9 @@
     <nav>
         <div class="container">
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="index.php?action=list">Jokes</a></li>
-                <li><a href="index.php?action=edit">Add Joke</a></li>
+                <li><a href="index.php?route=home">Home</a></li>
+                <li><a href="index.php?route=list">Jokes</a></li>
+                <li><a href="index.php?route=edit">Add Joke</a></li>
             </ul>
         </div>
     </nav>

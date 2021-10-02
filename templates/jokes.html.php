@@ -7,7 +7,7 @@
                     <a href="mailto:<?php echo $joke['email'] ?>"><?php echo $joke['name'] ?></a>
                     on <?php echo $joke['jokedate']?>)
                 </p>
-                <a href="index.php?action=edit&id=<?php echo $joke['id'] ?>">Edit</a>
+                <a href="index.php?route=edit&id=<?php echo $joke['id'] ?>">Edit</a>
                 <form action="index.php?action=delete" method="post">
                     <input type="hidden" name="id" value="<?php echo $joke['id'] ?>">
                     <input type="submit" value="Delete">
