@@ -1,4 +1,6 @@
 <?php
+namespace Ninja;
+
 class Database{
 
     private $pdo;

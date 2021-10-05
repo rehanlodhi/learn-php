@@ -1,4 +1,5 @@
 <?php
+namespace Ijdb;
 
 class Routes {
   public function callAction($routes) {
