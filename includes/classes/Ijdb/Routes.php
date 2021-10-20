@@ -3,33 +3,30 @@ namespace Ijdb;
 
 class Routes {
   public function callAction($routes) {
-    include dirname(__DIR__) . '/DatabaseConnection.php';
-    include dirname(__DIR__) . '/classes/Database.php';
+    include dirname(__DIR__) . '/../DatabaseConnection.php';
 
-    $jokesTable = new Database($pdo, 'joke', 'id');
-    $authorsTable = new Database($pdo, 'joke', 'id');
+    $jokesTable = new \Ninja\Database($pdo, 'joke', 'id');
+    $authorsTable = new \Ninja\Database($pdo, 'joke', 'id');
 
     if ( $routes === 'list' ) {
-        include dirname(__DIR__) . '/controllers/jokeController.php';
-        $controller = new JokeController($jokesTable, $authorsTable);
+        $controller = new \Ijdb\Controllers\Joke($jokesTable, $authorsTable);
         $page = $controller->list();
     } else if ( $routes === 'home' ) {
-        include dirname(__DIR__) . '/controllers/jokeController.php';
-        $controller = new JokeController($jokesTable, $authorsTable);
+        $controller = new \Ijdb\Controllers\Joke($jokesTable, $authorsTable);
+        var_dump($controller);
+
         $page = $controller->home();
     } else if ( $routes === 'edit' ) {
-        include dirname(__DIR__) . '/controllers/jokeController.php';
-        $controller = new JokeController($jokesTable, $authorsTable);
+        $controller = new \Ijdb\Controllers\Joke($jokesTable, $authorsTable);
         $page = $controller->edit();
     } else if ( $routes === 'delete' ) {
-        include dirname(__DIR__) . '/controllers/jokeController.php';
-        $controller = new JokeController($jokesTable, $authorsTable);
+        $controller = new \Ijdb\Controllers\Joke($jokesTable, $authorsTable);
         $page = $controller->delete();
     } else if ( $routes === 'register' ) {
-        include dirname(__DIR__) . '/controllers/RegisterController.php';
-        $controller = new RegisterController($authorsTable);
+        $controller = new \Ijdb\Controllers\Joke($authorsTable);
         $page = $controller->showForm();
     }
+
   return $page;
   }
 }

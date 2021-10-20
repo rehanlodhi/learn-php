@@ -22,7 +22,7 @@ class EntryPoint {
   private function loadTemplate($templateFileName, $variables = []){
     extract($variables);
     ob_start();
-    include dirname(__DIR__) . '/../templates/' . $templateFileName;
+    include $_SERVER['DOCUMENT_ROOT'] . '/learn-php/templates/' . $templateFileName;
     return ob_get_clean();
   }
 
@@ -35,7 +35,6 @@ class EntryPoint {
     } else {
         $output = $this->loadTemplate( $page['template']);
     }
-
-    include dirname(__DIR__) . '/../templates/layout.html.php';
+    include dirname(__DIR__) . '/../../templates/layout.html.php';
   }
 }

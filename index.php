@@ -10,7 +10,7 @@ try {
     $route = $_GET['route'] ?? 'home';
     //$route = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/learn-php/index.php');
 
-    $entryPoint = new EntryPoint($route, new Routes());
+    $entryPoint = new \Ninja\EntryPoint($route, new \Ijdb\Routes());
     $entryPoint->run();
 
 } catch (PDOException $e) {
