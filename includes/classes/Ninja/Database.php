@@ -1,41 +1,48 @@
 <?php
+
 namespace Ninja;
 
-class Database{
+class Database
+{
 
     private $pdo;
     private $table;
     private $primaryKey;
 
-    public function __construct(\PDO $pdo, string $table, string $primaryKey) {
+    public function __construct(\PDO $pdo, string $table, string $primaryKey)
+    {
         $this->pdo = $pdo;
         $this->table = $table;
         $this->primaryKey = $primaryKey;
     }
 
     // Query function to to process sql query
-    private function query($sql, $parameters = []){
+    private function query($sql, $parameters = [])
+    {
         $query = $this->pdo->prepare($sql);
         $query->execute($parameters);
         return $query;
     }
 
-// Get all data from database
-    public function findAll(){
-        $result = $this->query( 'SELECT * FROM `'. $this->table .'`');
+    // Get all data from database
+    public function findAll()
+    {
+        $result = $this->query('SELECT * FROM `' . $this->table . '`');
         return $result->fetchAll();
     }
 
-// Delete record from database
-    public function delete($id){
+    // Delete record from database
+    public function delete($id)
+    {
         $parameters = [':id' => $id];
-        $this->query('DELETE FROM`' . $this->table . '` WHERE `' . $this->primaryKey .'` = :id', $parameters);
+        $this->query('DELETE FROM`' . $this->table . '` WHERE `' . $this->primaryKey . '` = :id', $parameters);
     }
 
-// Insert record into database
-    private function insert($fields){
-        $query = 'INSERT INTO `' . $this->table .'` SET';
-        foreach ($fields as $key => $values){
+    // Insert record into database
+    private function insert($fields)
+    {
+        $query = 'INSERT INTO `' . $this->table . '` SET';
+        foreach ($fields as $key => $values) {
             $query .= '`' . $key . '` = :' . $key . ',';
         }
         $query = rtrim($query, ',');
@@ -45,27 +52,29 @@ class Database{
         $this->query($query, $fields);
     }
 
-// Update record if find duplicate id
-    public function save($record){
+    // Update record if find duplicate id
+    public function save($record)
+    {
         try {
-            if ($record[$this->primaryKey] == '' ){
+            if ($record[$this->primaryKey] == '') {
                 $record[$this->primaryKey] = null;
             }
             $this->insert($record);
 
-        } catch (\PDOException $e){
+        } catch (\PDOException $e) {
             $this->update($record);
         }
     }
 
-// Update record in the database
-    private function update($fields){
-        $query = 'UPDATE `'. $this->table .'` SET ';
+    // Update record in the database
+    private function update($fields)
+    {
+        $query = 'UPDATE `' . $this->table . '` SET ';
         foreach ($fields as $key => $value) {
             $query .= '`' . $key . '` = :' . $key . ',';
         }
         $query = rtrim($query, ',');
-        $query .= ' WHERE `'. $this->primaryKey .'` = :primarykey';
+        $query .= ' WHERE `' . $this->primaryKey . '` = :primarykey';
 
         $fields['primarykey'] = $fields['id'];
         $fields = $this->processDates($fields);
@@ -73,9 +82,10 @@ class Database{
         $this->query($query, $fields);
     }
 
-// Get one record from database
-    public function findById($value){
-        $query = 'SELECT * FROM `' . $this->table .'`WHERE `' . $this->primaryKey . '` = :value';
+    // Get one record from database
+    public function findById($value)
+    {
+        $query = 'SELECT * FROM `' . $this->table . '`WHERE `' . $this->primaryKey . '` = :value';
 
         $parameters = [
             'value' => $value
@@ -85,17 +95,32 @@ class Database{
         return $query->fetch();
     }
 
-// Get total number of records a database have
-    public function total(){
-        $query = $this->query('SELECT COUNT(*) FROM `'. $this->table .'`');
+    // Find value by column name
+    public function find($column, $value)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $column . ' = :value';
+
+        $parameters = [
+            'value' => $value
+        ];
+        $query = $this->query($query, $parameters);
+
+        return $query->fetchAll();
+    }
+
+    // Get total number of records a database have
+    public function total()
+    {
+        $query = $this->query('SELECT COUNT(*) FROM `' . $this->table . '`');
         $row = $query->fetch();
         return $row[0];
     }
 
-// Date format
-    private function processDates($fields){
-        foreach ($fields as $key => $value){
-            if ($value instanceof \DateTime){
+    // Date format
+    private function processDates($fields)
+    {
+        foreach ($fields as $key => $value) {
+            if ($value instanceof \DateTime) {
                 $fields[$key] = $value->format('Y-m-d');
             }
         }

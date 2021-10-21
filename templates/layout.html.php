@@ -19,6 +19,7 @@
                 <li><a href="index.php?route=home">Home</a></li>
                 <li><a href="index.php?route=list">Jokes</a></li>
                 <li><a href="index.php?route=edit">Add Joke</a></li>
+                <li><a href="index.php?route=register">Register</a></li>
             </ul>
         </div>
     </nav>

@@ -1,7 +1,7 @@
 <?php
 try {
     include __DIR__ . '/includes/DatabaseConnection.php';
-    include_once __DIR__ . '/includes/classes/Database.php';
+    //include_once __DIR__ . '/includes/classes/Database.php';
 
     //$jokes = getAllJokes($pdo); joke table able specific function
     $jokesTable = new Database($pdo, 'joke', 'id');

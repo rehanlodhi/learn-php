@@ -5,7 +5,7 @@
             <div class="joke-body">
                 <p><?php echo htmlspecialchars($joke['joketext'], ENT_QUOTES, 'UTF-8') ?> (
                     <a href="mailto:<?php echo $joke['email'] ?>"><?php echo $joke['name'] ?></a>
-                    on <?php echo $joke['jokedate']?>)
+                    on <?php echo $joke['jokedate'] ?>)
                 </p>
                 <a href="index.php?route=edit&id=<?php echo $joke['id'] ?>">Edit</a>
                 <form action="index.php?action=delete" method="post">

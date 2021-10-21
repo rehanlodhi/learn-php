@@ -1,16 +1,11 @@
-
 <?php
 
 try {
-    /*include __DIR__ . '/includes/classes/EntryPoint.php';
-    include __DIR__ . '/includes/classes/Routes.php';*/
-
     include __DIR__ . '/includes/autoload.php';
 
     $route = $_GET['route'] ?? 'home';
-    //$route = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/learn-php/index.php');
 
-    $entryPoint = new \Ninja\EntryPoint($route, new \Ijdb\Routes());
+    $entryPoint = new \Ninja\EntryPoint($route, $_SERVER['REQUEST_METHOD'], new \Ijdb\Routes());
     $entryPoint->run();
 
 } catch (PDOException $e) {
